@@ -1,14 +1,15 @@
 :root{ 
-    --color-primario:rgb(137, 137, 137)
+    --color-primario:rgb(137, 137, 137);
+    --font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 body{
       background-color: aquamarine;
 }
 h1{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: var(--font-family)
 }
 .text{
-font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+font-family: var(--font-family);
 font-size: 1.5rem;
 }
 #tictactoe {
@@ -36,4 +37,24 @@ border-top: 10px solid;
 }
 .ganador {
     background-color: brown;
+}
+
+dialog{
+    text-align: center;
+    min-width: 50vw;
+    background-color: aqua;
+    padding: 5rem;
+    border-radius: 50px;
+}
+
+dialog h2{
+    font-family: var(--font-family);
+    font-size: xx-large;
+}
+dialog button{
+    padding: 1rem;
+    font-size: large;
+}
+dialog::backdrop{
+    backdrop-filter: blur(3px);
 }

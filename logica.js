@@ -1,23 +1,33 @@
 const X= "X";
 const O= "O";
-let turno= "p1";
+let turno= "P1";
 
 //La segunda linea espera que el DOM este cargado
 document.addEventListener("DOMContentLoaded", () => {
-const casillas = document.querySelectorAll(".casilla");
-
+const casillas = Array.from(document.querySelectorAll(".casilla"));
+const modal= document.querySelector("dialog");
+const textoModal= modal.querySelector("h2");
 
 casillas.forEach((casilla,i) => {
     casilla.addEventListener("click", ()=>{
         if(turno=== "FIN") return;
-        casilla.innerText= turno === "p1" ? X : O;
-        turno= turno === "p1" ? "p2" : "p1";
-        verificarGanador()
+        if(casilla.textContent !== "") return;
+        casilla.innerText= turno === "P1" ? X : O;
+        const posicionGanador= verificarGanador()
+        if(typeof posicionGanador=== "objet"){
+            ganador(posicionGanador);
+            return
+        } 
+        if(posicionGanador=== "empate"){
+            mostrarModal("Empate!")
+        }
+        turno= turno === "P1" ? "P2" : "P1";
+
     })
 })
 
 function verificarGanador (){
-    const tablero= Array.from(casillas).map(casilla => casilla.innerText)
+    const tablero=  casillas.map(casilla => casilla.innerText)
     console.log(tablero);
 
 
@@ -49,14 +59,31 @@ function verificarGanador (){
          && tablero[2]=== tablero [6]){
             return ganador([2,4,6])
          }
+         //Empate
+         if(tablero.includes("")) return false;
+         return "empate";
 }
 function ganador(simboloGanador){
     console.log("ganaste wow", simboloGanador);
-    turno= "FIN";
     simboloGanador.forEach(posicion => {
         casillas[posicion].classList.toggle("ganador", true)
     })
+    mostrarModal("¡"+ turno +" ha ganado esta ronda!")
+     turno= "FIN";
 }
 
+function mostrarModal(texto){
+    textoModal.innerText= texto;
+    modal.showModal();
+
+}
+
+modal.querySelector("button").addEventListener("click",() =>{
+casillas.forEach(casillas => {
+    casillas.textContent = ""   
+    casillas.classList.toggle("ganador",false);
+    modal.close();
+    });
+});
 //
 });
