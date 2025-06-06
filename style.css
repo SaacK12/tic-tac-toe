@@ -1,21 +1,24 @@
 :root{ 
-    --color-primario:rgb(137, 137, 137);
+    --color-primario:rgb(255, 255, 255);
     --font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 body{
-      background-color: aquamarine;
+background: linear-gradient(#2f3136, #0d1117);
 }
 h1{
-    font-family: var(--font-family)
+    font-family: var(--font-family);
+    color: var(--color-primario) !important;
 }
 .text{
 font-family: var(--font-family);
 font-size: 1.5rem;
+color: var(--color-primario);
 }
 #tictactoe {
     display: grid;
     grid-template-columns: repeat(3, 0fr);
     justify-content: center;
+    color: var(--color-primario);
 }
 .casilla{
     height: 200px;
@@ -42,14 +45,16 @@ border-top: 10px solid;
 dialog{
     text-align: center;
     min-width: 50vw;
-    background-color: aqua;
+    background: linear-gradient(#99999b75, #00000000);
     padding: 5rem;
     border-radius: 50px;
+    border-color: var(--color-primario);;
 }
 
 dialog h2{
     font-family: var(--font-family);
     font-size: xx-large;
+    color: var(--color-primario);
 }
 dialog button{
     padding: 1rem;
