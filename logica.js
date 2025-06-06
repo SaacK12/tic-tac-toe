@@ -1,8 +1,10 @@
 const X= "X";
 const O= "O";
-let turno= "P1";
+let turno= "P1"; 
+let puntuacionP1= 0;
+let puntuacionP2= 0;
 
-//La segunda linea espera que el DOM este cargado
+//La linea 6 espera que el DOM este cargado
 document.addEventListener("DOMContentLoaded", () => {
 const casillas = Array.from(document.querySelectorAll(".casilla"));
 const modal= document.querySelector("dialog");
@@ -13,6 +15,7 @@ casillas.forEach((casilla,i) => {
         if(turno=== "FIN") return;
         if(casilla.textContent !== "") return;
         casilla.innerText= turno === "P1" ? X : O;
+        //Posicion ganadora
         const posicionGanador= verificarGanador()
         if(typeof posicionGanador=== "objet"){
             ganador(posicionGanador);
@@ -22,6 +25,8 @@ casillas.forEach((casilla,i) => {
             mostrarModal("Empate!")
         }
         turno= turno === "P1" ? "P2" : "P1";
+        //Mostrar turno acutal
+        document.getElementById("turnoJugador").innerText= `El turno es de: ${turno}`;
 
     })
 })
@@ -63,7 +68,19 @@ function verificarGanador (){
          if(tablero.includes("")) return false;
          return "empate";
 }
+//Mensaje ganador
 function ganador(simboloGanador){
+    //Contador de la puntuacion
+    if(turno=== "P1"){
+        puntuacionP1++
+        console.log(puntuacionP1)
+        document.getElementById("puntuacionX").innerText= `Puntuacion de X: ${puntuacionP1}`;
+     }
+     if(turno=== "P2"){
+        puntuacionP2++
+        console.log(puntuacionP2)
+        document.getElementById("puntuacionO").innerText= `Puntuacion de O: ${puntuacionP2}`;
+     }
     console.log("ganaste wow", simboloGanador);
     simboloGanador.forEach(posicion => {
         casillas[posicion].classList.toggle("ganador", true)
